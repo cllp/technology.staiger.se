@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technology — Claes-Philip Staiger</title>
+    <meta name="description" content="Claes-Philip Staiger — IT Architecture, Technology Consulting & Social Impact">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --charcoal-900: #1a1a1a;
+            --charcoal-800: #2d2d2d;
+            --charcoal-700: #404040;
+            --charcoal-600: #555555;
+            --charcoal-500: #6d6d6d;
+            --warm-50: #faf9f7;
+            --warm-100: #f5f3f0;
+            --warm-200: #e8e4df;
+            --warm-300: #d4cfc8;
+            --accent: #8b7355;
+            --accent-light: #a6936f;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--warm-50);
+            min-height: 100vh;
+            color: var(--charcoal-800);
+        }
+
+        .lang-en { display: none; }
+        .lang-sv { display: inline; }
+        body.en .lang-en { display: inline; }
+        body.en .lang-sv { display: none; }
+        .lang-block-en { display: none; }
+        .lang-block-sv { display: block; }
+        body.en .lang-block-en { display: block; }
+        body.en .lang-block-sv { display: none; }
+
+        /* Header */
+        header {
+            padding: 2.5rem 2rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .site-name {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--charcoal-900);
+            letter-spacing: 0.32em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .site-name:hover { color: var(--charcoal-600); }
+
+        .lang-switch {
+            display: flex;
+            gap: 0.25rem;
+            font-size: 0.8rem;
+        }
+
+        .lang-switch button {
+            background: none;
+            border: 1px solid transparent;
+            color: var(--charcoal-500);
+            cursor: pointer;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+
+        .lang-switch button:hover { color: var(--charcoal-800); }
+        .lang-switch button.active {
+            color: var(--charcoal-900);
+            border-color: var(--warm-300);
+            background: var(--warm-100);
+            font-weight: 500;
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem 3rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 3.2rem;
+            font-weight: 300;
+            color: var(--charcoal-900);
+            line-height: 1.15;
+            margin-bottom: 1rem;
+            letter-spacing: -0.01em;
+        }
+
+        .hero p {
+            font-size: 1.05rem;
+            color: var(--charcoal-600);
+            font-weight: 300;
+            line-height: 1.65;
+        }
+
+        /* Cards grid */
+        .cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+
+        @media (min-width: 768px) {
+            .cards { grid-template-columns: 1fr 1fr; }
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid var(--warm-200);
+            border-radius: 12px;
+            padding: 2.25rem 2rem;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .card:hover {
+            border-color: var(--warm-300);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+            transform: translateY(-3px);
+        }
+
+        .card:hover::before { opacity: 1; }
+
+        .card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: var(--warm-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+            font-size: 1.2rem;
+            color: var(--accent);
+        }
+
+        .card h2 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--charcoal-900);
+            margin-bottom: 0.35rem;
+            line-height: 1.2;
+        }
+
+        .card .subtitle {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.9rem;
+        }
+
+        .card .desc {
+            font-size: 0.9rem;
+            color: var(--charcoal-600);
+            line-height: 1.65;
+            font-weight: 300;
+            flex: 1;
+        }
+
+        .card .arrow {
+            margin-top: 1.25rem;
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: gap 0.2s;
+        }
+
+        .card:hover .arrow { gap: 0.7rem; }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.75rem;
+            color: var(--charcoal-500);
+            border-top: 1px solid var(--warm-200);
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        footer a {
+            color: var(--charcoal-500);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        footer a:hover { color: var(--charcoal-800); }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 2.4rem; }
+            .hero { padding: 3rem 1.5rem 2rem; }
+            .cards { padding: 0 1.25rem 3rem; }
+            .card { padding: 1.75rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="https://staiger.se" class="site-name">Claes-Philip Staiger</a>
+        <div class="lang-switch">
+            <button onclick="setLanguage('sv')" id="btn-sv" class="active">SV</button>
+            <button onclick="setLanguage('en')" id="btn-en">EN</button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>
+            <span class="lang-sv">IT-arkitektur, teknik &amp; samhällsnytta</span>
+            <span class="lang-en">IT Architecture, Technology &amp; Social Impact</span>
+        </h1>
+        <p>
+            <span class="lang-sv">Lösningsarkitektur och rådgivning inom IT, integration och digital transformation — med engagemang för samhällsnytta och humanitärt arbete.</span>
+            <span class="lang-en">Solution architecture and advisory in IT, integration and digital transformation — with commitment to social impact and humanitarian work.</span>
+        </p>
+    </section>
+
+    <nav class="cards">
+
+        <!-- Card 1: Claes-Philip -->
+        <a href="#" onclick="navigateTo('claes-philip'); return false;" class="card">
+            <div class="card-icon">
+                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+            </div>
+            <h2>Claes-Philip Staiger</h2>
+            <div class="subtitle">
+                <span class="lang-sv">Konsult & Lösningsarkitekt</span>
+                <span class="lang-en">Consultant & Solution Architect</span>
+            </div>
+            <div class="desc">
+                <span class="lang-block-sv">Presentation, CV, uppdrag och kundcase. Över 20 års erfarenhet av enterprise-arkitektur, integrationsplattformar och IT-strategi inom privat och offentlig sektor. Referenser och kontaktuppgifter.</span>
+                <span class="lang-block-en">Profile, CV, assignments and client cases. Over 20 years of experience in enterprise architecture, integration platforms and IT strategy across private and public sectors. References and contact details.</span>
+            </div>
+            <div class="arrow">
+                <span class="lang-sv">Se profil</span>
+                <span class="lang-en">View profile</span>
+                <span>&rarr;</span>
+            </div>
+        </a>
+
+        <!-- Card 2: Consulting -->
+        <a href="#" onclick="navigateTo('consulting'); return false;" class="card">
+            <div class="card-icon">
+                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+            </div>
+            <h2>Consulting</h2>
+            <div class="subtitle">Claes-Philip Staiger AB</div>
+            <div class="desc">
+                <span class="lang-block-sv">Konsultbolag specialiserat på enterprise-arkitektur, systemintegration och digital transformation. Vi hjälper organisationer att designa hållbara IT-arkitekturer, modernisera legacysystem och genomföra teknikstrategier som skapar affärsvärde.</span>
+                <span class="lang-block-en">Consulting firm specialized in enterprise architecture, system integration and digital transformation. We help organizations design sustainable IT architectures, modernize legacy systems and execute technology strategies that create business value.</span>
+            </div>
+            <div class="arrow">
+                <span class="lang-sv">Om företaget</span>
+                <span class="lang-en">About the firm</span>
+                <span>&rarr;</span>
+            </div>
+        </a>
+
+        <!-- Card 3: Impact -->
+        <a href="#" onclick="navigateTo('ngo'); return false;" class="card">
+            <div class="card-icon">
+                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 21C12 21 3 13.5 3 8.5C3 5.42 5.42 3 8.5 3C10.24 3 11.91 3.81 12 5C12.09 3.81 13.76 3 15.5 3C18.58 3 21 5.42 21 8.5C21 13.5 12 21 12 21Z"/></svg>
+            </div>
+            <h2>Impact</h2>
+            <div class="subtitle">
+                <span class="lang-sv">Humanitärt & Offentlig Sektor</span>
+                <span class="lang-en">Humanitarian & Public Sector</span>
+            </div>
+            <div class="desc">
+                <span class="lang-block-sv">Engagemang och erfarenhet inom humanitärt arbete, offentlig sektor och samhällsnytta. Hur teknik och arkitekturkompetens kan bidra till samhällsutveckling, ideella organisationer och internationellt bistånd.</span>
+                <span class="lang-block-en">Engagement and experience in humanitarian work, public sector and social impact. How technology and architecture expertise can contribute to community development, NGOs and international aid.</span>
+            </div>
+            <div class="arrow">
+                <span class="lang-sv">Läs mer</span>
+                <span class="lang-en">Read more</span>
+                <span>&rarr;</span>
+            </div>
+        </a>
+
+        <!-- Card 4: Blog -->
+        <a href="#" onclick="navigateTo('blog'); return false;" class="card">
+            <div class="card-icon">
+                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M4 4h16v16H4z" rx="1"/><path d="M8 8h8M8 12h6M8 16h4"/></svg>
+            </div>
+            <h2>Technology Blog</h2>
+            <div class="subtitle">
+                <span class="lang-sv">Artiklar & Fördjupningar</span>
+                <span class="lang-en">Articles & Deep Dives</span>
+            </div>
+            <div class="desc">
+                <span class="lang-block-sv">11 artiklar om enterprise-arkitektur, integration, Kubernetes, mikrotjänster, DevOps, PKI, digital transformation och teknikstrategi. Alla artiklar finns på engelska och svenska.</span>
+                <span class="lang-block-en">11 articles on enterprise architecture, integration, Kubernetes, microservices, DevOps, PKI, digital transformation and technology strategy. All articles available in English and Swedish.</span>
+            </div>
+            <div class="arrow">
+                <span class="lang-sv">Till bloggen</span>
+                <span class="lang-en">Go to blog</span>
+                <span>&rarr;</span>
+            </div>
+        </a>
+
+    </nav>
+
+    <footer>
+        <p>
+            <span class="lang-sv">Stockholm / Visby — <a href="mailto:claes-philip@staiger.se">claes-philip@staiger.se</a></span>
+            <span class="lang-en">Stockholm / Visby — <a href="mailto:claes-philip@staiger.se">claes-philip@staiger.se</a></span>
+        </p>
+    </footer>
+
+    <script>
+        let currentLang = localStorage.getItem('staiger-lang') || 'sv';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('staiger-lang', lang);
+            updateLanguage();
+        }
+
+        function updateLanguage() {
+            document.body.classList.toggle('en', currentLang === 'en');
+            document.getElementById('btn-sv').classList.toggle('active', currentLang === 'sv');
+            document.getElementById('btn-en').classList.toggle('active', currentLang === 'en');
+        }
+
+        function navigateTo(destination) {
+            const urls = {
+                'claes-philip': { prod: 'https://claes-philip.staiger.se', local: '../claes-philip.staiger.se/index.html', bilingual: true },
+                'consulting': { prod: 'https://consulting.staiger.se', local: '../consulting.staiger.se/index.html', bilingual: true },
+                'ngo': { prod: 'https://ngo.staiger.se', local: '../ngo.staiger.se/index.html', bilingual: false },
+                'blog': { prod: 'https://blog.staiger.se', local: '../blog.staiger.se/index.html', bilingual: false }
+            };
+
+            const site = urls[destination];
+            const isLocal = window.location.hostname === 'localhost' || window.location.protocol === 'file:';
+            const useEnglish = currentLang === 'en' && site.bilingual;
+
+            if (isLocal) {
+                window.location.href = useEnglish ? site.local.replace('index.html', 'en.html') : site.local;
+            } else {
+                window.location.href = site.prod + (useEnglish ? '/en.html' : '/');
+            }
+        }
+
+        updateLanguage();
+    </script>
+
+</body>
+</html>
